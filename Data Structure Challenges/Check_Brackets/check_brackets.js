@@ -3,15 +3,15 @@
 // 2. String can contain letters, digits, and punctuation marks
 // 3. String can be empty, can have nested brackets 
 
-function check_brackets(str) {
+function check_brackets(str) {              // O(n) linear time complexity
     const brackets = ['{', '(', '[', '}', ')', ']'];
 
     // using a stack to keep track of opening brackets
     const open = [];
 
-    // O(n)
+    // O(n) linear time complexity
     for (let char of str) {
-        // check if char is one of the brackets, returns -1 if not - O(brackets.length) 
+        // check if char is one of the brackets, returns -1 if not - O(brackets.length) or O(6) constant time complexity
         let ind = brackets.indexOf(char);
 
         // if char is not one of the brackets
@@ -30,7 +30,11 @@ function check_brackets(str) {
             }
             // pop the last item in items and comparing it with char
             let last = open.pop()
-            if (char === '}' && last != '{' || char === ')' && last != '(' || char === ']' && last != '['){
+            if (char === '}' && last != '{' 
+            || 
+            char === ')' && last != '(' 
+            || 
+            char === ']' && last != '['){
                 return false;
             }
         }

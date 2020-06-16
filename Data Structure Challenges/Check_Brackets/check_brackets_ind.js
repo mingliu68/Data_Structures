@@ -1,5 +1,5 @@
 // 1. Check the string and see if there is mismatching brackets [], (), {}
-   // Return index of first mismatching occurance (first closing bracket or first opening bracket)
+   // Return the index of first mismatching occurance (first closing bracket or first opening bracket if there is no closing brackets left)
    // Return "All Brackets Matching" if all brackets are matching
 // 2. String can contain letters, digits, and punctuation marks
 // 3. String can be empty, can have nested brackets 
@@ -13,7 +13,7 @@ function check_brackets_ind(str) {              // O(n) linear time complexity
     const open = [];
 
    
-    for(let i = 0; i < str.length; i++) {       // O(n) time complexity
+    for(let i = 0; i < str.length; i++) {       // O(n) linear time complexity
         // check and see if str[i] is a bracket, return -1 if not
        
         let ind = brackets.indexOf(str[i])      // O(brackets.length) or O(6) constant time complexity
@@ -35,7 +35,11 @@ function check_brackets_ind(str) {              // O(n) linear time complexity
 
             // pop the last item (object) in stack, get the bracket value and comparing it with str[i]
             let last = open.pop().bracket
-            if (last === "(" && str[i] != ")" || last === "{" && str[i] != "}" || last === "[" && str[i] != "]") {
+            if (last === "(" && str[i] != ")" 
+            || 
+            last === "{" && str[i] != "}" 
+            || 
+            last === "[" && str[i] != "]") {
                 return i
             }
         }
