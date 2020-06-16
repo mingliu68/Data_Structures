@@ -5,17 +5,18 @@
 // 3. String can be empty, can have nested brackets 
 
 
-function check_brackets_ind(str) {
+function check_brackets_ind(str) {              // O(n) linear time complexity
     const brackets = ['{', '(', '[', '}', ')', ']'];
 
     // using a stack to keep track of opening brackets
-    // each item will be an object  {index: 3, bracket: "["}
+    // each item will be an object tracking the index and type of opening bracket {index: 3, bracket: "["}
     const open = [];
 
-    // O(n) time complexity / asymptotic behavior
-    for(let i = 0; i < str.length; i++) {
+   
+    for(let i = 0; i < str.length; i++) {       // O(n) time complexity
         // check and see if str[i] is a bracket, return -1 if not
-        let ind = brackets.indexOf(str[i])
+       
+        let ind = brackets.indexOf(str[i])      // O(brackets.length) or O(6) constant time complexity
         
         // str[i] is not a bracket, skip the following steps and continue to next iteration
         if (ind == -1) continue;
@@ -53,6 +54,7 @@ console.log(check_brackets_ind(test_1))
 console.log(check_brackets_ind(test_2))
 console.log(check_brackets_ind(test_3))
 console.log(check_brackets_ind(test_4))
+console.log(check_brackets_ind(test_5))
 console.log(check_brackets_ind(""))
 console.log(check_brackets_ind("abc"))
 console.log(check_brackets_ind("abc["))
