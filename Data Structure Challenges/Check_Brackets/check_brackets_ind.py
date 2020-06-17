@@ -1,7 +1,7 @@
 # 1. Check the string and see if there is mismatching brackets [], (), {}
    # Return the index of first mismatching occurance (first closing bracket or first opening bracket if there is no closing brackets left)
    # Return "All Brackets Matching" if all brackets are matching
-# 2. String can contain letters, digits, and punctuation marks
+# 2. String can also contain letters, digits, and punctuation marks
 # 3. String can be empty, can have nested brackets 
 
 def check_brackets_ind(str):
@@ -21,10 +21,6 @@ def check_brackets_ind(str):
                 return i
 
     return "All Brackets Matching" if len(items) == 0 else items[0]["ind"] 
-
-
-
-
 
 
 test_1 = '(()())';
