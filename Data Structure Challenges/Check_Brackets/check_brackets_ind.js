@@ -10,7 +10,7 @@ function check_brackets_ind(str) {              // O(n) linear time complexity
 
     // using a stack to keep track of opening brackets
     // each item will be an object tracking the index and type of opening bracket {index: 3, bracket: "["}
-    const open = [];
+    const open_stack = [];
 
    
     for(let i = 0; i < str.length; i++) {       // O(n) linear time complexity
@@ -23,18 +23,18 @@ function check_brackets_ind(str) {              // O(n) linear time complexity
         
         // if str[i] is an opening bracket, push to stack
         if (ind < 3 && ind >= 0) {
-            open.push({index: i, bracket: str[i]})
+            open_stack.push({index: i, bracket: str[i]})
         }
         
         // if str[i] is a closing bracket
         else {
             // if there is no matching opening bracket to match this closing bracket
-            if(open.length == 0) {
+            if(open_stack.length == 0) {
                 return i                    
             }
 
             // pop the last item (object) in stack, get the bracket value and comparing it with str[i]
-            let last = open.pop().bracket
+            let last = open_stack.pop().bracket
             if (last === "(" && str[i] != ")" 
             || 
             last === "{" && str[i] != "}" 
@@ -45,7 +45,7 @@ function check_brackets_ind(str) {              // O(n) linear time complexity
         }
     }
 
-    return open.length == 0 ? "All Brackets Matching" : open[0].index;
+    return open_stack.length == 0 ? "All Brackets Matching" : open_stack[0].index;
 }
 
 let test_1 = '(()())';

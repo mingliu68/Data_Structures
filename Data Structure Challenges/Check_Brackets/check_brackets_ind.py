@@ -6,21 +6,21 @@
 
 def check_brackets_ind(str):
     brackets = "({[)}]"
-    items = []
+    open_stack = []
     for i, char in enumerate(str):
         index = brackets.find(char)
         if index == -1: 
             continue
         if index < 3 and index >= 0:
-            items.append({"ind":i, "bracket": char})
+            open_stack.append({"ind":i, "bracket": char})
         else:
-            if len(items) == 0:
+            if len(open_stack) == 0:
                 return i
-            last = items.pop()["bracket"]
+            last = open_stack.pop()["bracket"]
             if last == "(" and char != ")" or last == "{" and char != "}" or last == "[" and char != "]":
                 return i
 
-    return "All Brackets Matching" if len(items) == 0 else items[0]["ind"] 
+    return "All Brackets Matching" if len(open_stack) == 0 else open_stack[0]["ind"] 
 
 
 test_1 = '(()())';

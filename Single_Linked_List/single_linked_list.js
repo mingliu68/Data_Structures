@@ -6,12 +6,15 @@ class Node {
         this.key = key;
         this.next = next;
     }
+    remove() {
+        this.next = null;
+    } 
 }
 
 class List {
     constructor(head = null) {
         this.head = head
-        this.max = 0
+        this.max = head == null ? 0 : 1
     }
 
     // add a node to front of the list, return list.max (length)
@@ -27,29 +30,29 @@ class List {
         return this.head
     }
 
-    // remove front item, return old node
+    // remove front item, return removed node
     popFront() {
-        if(this.max_length < 1) return
+        if(this.head == null) return null
         let oldHead = this.head
         this.head = oldHead.next
-        oldHead.next = null
+        oldHead.remove()
         this.max -= 1
         return oldHead   
     }
     // add a node after a specific node
     addAfter(node, key){
         if (node == null) return null
-        
         let newNode = new Node(key, node.next)
         node.next = newNode
         this.max += 1
+        return this.max
     }
 
     // add a node before a specific node
     addBefore(node, key) {
         if (node == null) return null
 
-        let [current, prev] = [list.head, null]
+        let [current, prev] = [this.head, null]
         while(current != node && current.next) {
             prev = current
             current = current.next
@@ -75,7 +78,6 @@ class List {
         let node = new Node(key, null)
         if(this.head == null) {
             this.head = node
-            this.max += 1
         }
         else {
             let current = this.head
@@ -83,8 +85,8 @@ class List {
                 current = current.next
             }
             current.next = node
-            this.max += 1
-        }            
+        }
+        this.max += 1            
         return this.max
     }
 
@@ -142,27 +144,26 @@ class List {
         if (this.head.key == key) {
             let oldHead = this.head
             this.head = this.head.next
-            oldHead.next = null
+            oldHead.remove()
             this.max -= 1
             return oldHead
         }
 
         else {
-            let [current, pre] = [list.head, null]
+            let [current, pre] = [this.head, null]
             while(current.key != key && current.next) {
                 pre = current
                 current = current.next
-
             }
             if (current.key == key) {
                 // if the matching node is the head
                 if (this.head == current) {
                     this.head = current.next
-                    current.next = null
+                    current.remove()
                 }   
                 else {
                     pre.next = current.next
-                    current.next = null
+                    current.remove()
                 }
                 this.max -= 1
                 return current   
@@ -174,8 +175,8 @@ class List {
     }
 
     // is list empty?
-    empty() {
-        return this.max == 0
+    isEmpty() {
+        return this.head == null
     }
 }
 
@@ -192,49 +193,95 @@ module.exports = {
 
 
 
+// ↓↓↓   basic testing   ↓↓↓
+
+function testing() {
+    let elem = [1,2,3,4,5,6,7,8,9,10]
+    //let founding_node = new Node('A', null)
+    //let list = new List(founding_node)
+    let list = new List()
+    
+
+    for (let el of elem) {
+        list.pushBack(el)
+    }
+
+    console.log('\n===== list.max =====')
+    console.log(list.max)
+
+    console.log('\n===== pushFront(0) =====')
+    console.log(list.pushFront(0))
 
 
+    console.log('\n===== pushFront(-1) =====')
+    console.log(list.pushFront(-1))
+
+    console.log('\n===== addAfter(node(10), 11) =====')
+    console.log(list.addAfter(list.find(10), 11))
+
+    console.log('\n===== addBefore(list.head, -3) =====')
+    console.log(list.addBefore(list.head, -3))
+
+    console.log('\n===== list.topFront() =====')
+    console.log(list.topFront())
+
+    console.log('\n===== pushFront(-2) =====')
+    console.log(list.pushFront(-2))
+
+    console.log('\n===== pushBack(12) =====')
+    list.pushBack(12)
+    console.log(list.max)
+
+    console.log('\n===== list.topFront() =====')
+    console.log(list.topFront())
+
+    let node = list.head
+
+    console.log('\n ===== beginning of list =====')
+    while(node) {
+        console.log(`Node Value: ${node.key}, Next Value: ${node.next? node.next.key : node.next}`)
+        node = node.next
+    }
+    console.log('===== end of list =====\n')
+
+    console.log('\n===== popFront() =====')
+    console.log(list.popFront())
+    console.log(list.max)
+    
+    console.log('\n===== list.head =====')
+    console.log(list.head)
+
+    console.log('\n===== topBack() =====')
+    console.log(list.topBack())
+
+    console.log('\n===== popBack() =====')
+    console.log(list.popBack())
+    console.log(list.max)
+
+    console.log('\n===== topBack() =====')
+    console.log(list.topBack())
+
+    console.log('\n===== list.max =====')
+    console.log(list.max)
+
+    console.log('\n===== erase(9) =====')
+    console.log(list.erase(9))
+    console.log(list.max)
+
+    node = list.head
+
+    console.log('\n===== beginning of list =====')
+    while(node) {
+        console.log(`Node Value: ${node.key}, Next Value: ${node.next? node.next.key : node.next}`)
+        node = node.next
+    }
+    console.log('===== end of list =====\n')
+    
+    console.log('\n===== list.max =====')
+    console.log(list.max)
+
+}
 
 
-
-// let elem = [1,2,3,4,5,6,7,8,9,10]
-// let list = new List()
-
-// for (let el of elem) {
-//     list.pushBack(el)
-// }
-
-// list.pushFront(0)
-// list.pushFront(-1) 
-// list.addAfter(list.find(10), 11)
-// list.addBefore(list.head, -3)
-// console.log(list.topFront())
-// list.pushFront(-2)
-// list.pushBack(12)
-
-// console.log(list.topFront())
-
-// let node = list.head
-
-// while(node) {
-//     console.log(`Node Value: ${node.key}, Next Value: ${node.next? node.next.key : node.next}`)
-//     node = node.next
-// }
-
-// console.log(list.popFront())
-// console.log(list.head)
-// console.log(list.topBack())
-// console.log(list.popBack())
-// console.log(list.topBack())
-// console.log(list.max)
-// console.log(list.erase(9))
-
-// node = list.head
-// while(node) {
-//     console.log(`Node Value: ${node.key}, Next Value: ${node.next? node.next.key : node.next}`)
-//     node = node.next
-// }
-
-// console.log(list.max)
-
+testing()
 

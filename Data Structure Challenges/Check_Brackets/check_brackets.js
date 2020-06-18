@@ -7,7 +7,7 @@ function check_brackets(str) {              // O(n) linear time complexity
     const brackets = ['{', '(', '[', '}', ')', ']'];
 
     // using a stack to keep track of opening brackets
-    const open = [];
+    const open_stack = [];
 
     // O(n) linear time complexity
     for (let char of str) {
@@ -19,17 +19,17 @@ function check_brackets(str) {              // O(n) linear time complexity
 
         // if char is one of the open brackets, push to items
         if (ind >= 0 && ind < 3) {
-           open.push(char)
+           open_stack.push(char)
         } 
 
         // if char is one of the closing brackets, follow the steps below
         else { 
             // return false if there is no open brackets left
-            if (open.length == 0) {
+            if (open_stack.length == 0) {
                 return false;
             }
             // pop the last item in items and comparing it with char
-            let last = open.pop()
+            let last = open_stack.pop()
             if (char === '}' && last != '{' 
             || 
             char === ')' && last != '(' 
@@ -39,7 +39,7 @@ function check_brackets(str) {              // O(n) linear time complexity
             }
         }
     }
-    return open.length === 0;
+    return open_stack.length === 0;
 }
 
 

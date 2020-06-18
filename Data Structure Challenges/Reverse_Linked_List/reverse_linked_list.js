@@ -47,8 +47,6 @@ display_list(list_empty)
 let rev_list_empty = reverse_linked_list(list_empty)
 display_list(rev_list_empty)
 
-
-
 function creating_list_from_array(arr) {
     let list = new List()
     for (let el of arr) {
@@ -58,7 +56,7 @@ function creating_list_from_array(arr) {
 }
 
 function display_list(list) {
-    console.log('===== beginning of list =====')
+    console.log('\n===== beginning of list =====')
 
     let current = list.head
     while(current) {
@@ -66,7 +64,7 @@ function display_list(list) {
         current = current.next
     }
     console.log('===== end of list =====')
-    console.log('          ')
+
 }
 
 

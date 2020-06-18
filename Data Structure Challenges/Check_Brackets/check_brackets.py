@@ -5,21 +5,21 @@
 
 def check_brackets(str):
     brackets = "({[)}]"
-    items = []
+    open_stack = []
     for char in str:
         index = brackets.find(char)
         if index == -1:
             continue
         if index < 3 and index >= 0:
-            items.append(char)
+            open_stack.append(char)
         else:
-            if len(items) == 0:
+            if len(open_stack) == 0:
                 return False
-            last = items.pop()
+            last = open_stack.pop()
             if last == "(" and char != ")" or last == "{" and char != "}" or last == "[" and char != "]":
                 return False
     
-    return True if len(items) == 0 else False
+    return True if len(open_stack) == 0 else False
 
 
 test_1 = '(()())';
