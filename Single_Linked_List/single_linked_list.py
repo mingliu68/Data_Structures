@@ -1,6 +1,7 @@
 # single linked list with no tail
 
 
+
 class ListNode:
     def __init__(self, key, next = None):
         self.key = key
@@ -31,9 +32,9 @@ class SingleLinkedList:
 
     #popFront - remove first node of the list, return the removed node
     def popFront(self):
-        # empty list? return null
+        # empty list? return None
         if self.head is None:
-            return null
+            return None
         else:
             old_head = self.head
             self.head = old_head.next
@@ -174,7 +175,7 @@ class SingleLinkedList:
         return None if current is not node else current
 
 
-    #eraseKey - erase the first occurance of the node with matching key, return removed node if it exist, else return null
+    #eraseKey - erase the first occurance of the node with matching key, return removed node if it exist, else return None
     def eraseKey(self, key):
         # if head is None, return None
         # if head node's key value is equal to key, update head pointer to node.next, remove node 
@@ -205,7 +206,7 @@ class SingleLinkedList:
             return None if current.key is not key else current
         
 
-    #eraseNode - erase the specific node, return removed node if it exist, else null
+    #eraseNode - erase the specific node, return removed node if it exist, else None
     def eraseNode(self, node):
         if self.head is None: 
             return None
@@ -233,6 +234,20 @@ class SingleLinkedList:
     #isEmpty - return whether the list is empty
     def isEmpty(self):
         return True if self.head is None else False
+
+
+    #return node key that is the highest in the node
+    def getMax(self):
+        pass
+
+    
+    def moveToFront(self):
+        pass
+
+
+    def moveToBack(self):
+        pass
+
 
 
 def main():
@@ -289,4 +304,4 @@ def display_list(list):
     print("=====    End of List    =====")
 
 
-main()
+#main()
